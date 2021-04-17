@@ -77,22 +77,25 @@ function App() {
       </div>
       <div className="app__stats">
         {/** InfoBox */}
-        <InfoBox title="Cases" cases={countryInfo.todayCases} total={countryInfo.cases}/>  
+        <InfoBox title="Cases" cases={countryInfo.todayCases} total={countryInfo.cases} onClick={(e)=>setCasesType("cases")}
+                 active={casesType === "cases"} isCases/>  
         {/** InfoBox */}
-        <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered}/>  
+        <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} onClick={(e)=>setCasesType("recovered")}
+                 active={casesType === "recovered"} isRecovered/>  
         {/** InfoBox */}
-        <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths}/>
+        <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} onClick={(e)=>setCasesType("deaths")}
+                 active={casesType === "deaths"} isDeaths/>
       </div>
         {/** Map */}
         <Map casesType={casesType} countries={mapCountries}  center={mapCenter} zoom={mapZoom} />
       </div>
       <Card className="app__right">
         <CardContent>
-          <h3>Live Cases by Countries</h3>
+          <h3>Total Cases by Countries</h3>
         {/** Table */}
         <Table countries={tableData}/>
         {/** Graph */}
-        <Linegraph/>
+        <Linegraph casesType={casesType}/>
         </CardContent>
       </Card>
     </div>
