@@ -16,10 +16,10 @@ const casesTypeColors = {
       multiplier: 300,
     },
     deaths: {
-      hex: "#fb4443",
+      hex: "#808080",
     //   rgb: "rgb(251, 68, 67)",
     //   half_op: "rgba(251, 68, 67, 0.5)",
-      multiplier: 500,
+      multiplier: 1000,
     },
   };
 
@@ -28,12 +28,17 @@ export const sortData = (data) =>{
     return sortedData.sort((a,b) =>(a.cases > b.cases)?-1:1);
 }
 
+export const prettyPrintStat = (stat) =>
+  stat ? `+${numeral(stat).format("0.0a")}` : "+0";
+
 export const showDataOnMap = (data, casesType = "cases") =>
   data.map((country) => (
     <Circle
       center={[country.countryInfo.lat, country.countryInfo.long]}
-      color={casesTypeColors[casesType].hex}
-      fillColor={casesTypeColors[casesType].hex}
+      pathOptions={{
+        color: casesTypeColors[casesType].hex,
+        fillColor: casesTypeColors[casesType].hex,
+      }}
       fillOpacity={0.4}
       radius={
         Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
