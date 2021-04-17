@@ -48,47 +48,53 @@ const options = {
     },
   };
 
-const buildChartData = (data)=> {
+  const buildChartData = (data,casesType)=> {
     const chartData =[];
     let lastDataPoint;
     for(let date in data.cases){
         if(lastDataPoint){
             let newDataPoint = {
                 x : date,
-                y : data["cases"][date] - [lastDataPoint]
+                y : data[casesType][date] - [lastDataPoint]
             }
             chartData.push(newDataPoint);
         }
-        lastDataPoint = data["cases"][date]
+        lastDataPoint = data[casesType][date]
     }
     return chartData;
-}
+} 
 
-function Linegraph() {
+function Linegraph({casesType = "cases"}) {
     const [data, setData] = useState({});
 
     //https://disease.sh/v3/covid-19/historical/all?lastdays=120
-    
+
     useEffect(()=>{
         const dataFetch = async ()=> {
             await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
                     .then(response => response.json())
                     .then(data => {
-            let chartedData = buildChartData(data);
+            let chartedData = buildChartData(data,casesType);
             setData(chartedData);
         })}
         dataFetch();
-    })
+    },[casesType]);
+
+    const selectedColor = {
+      cases:"#CC1034",
+      recovered:"#7dd71d",
+      deaths:"#fb4443"
+    }
     return (
         <div>
-        <h3>Worldwide new Cases</h3> 
+        <h3 style={{marginTop : "30px"}}>Worldwide new {casesType}</h3> 
         {data?.length > 0 && (
         <Line
           data={{
             datasets: [
               {
                 backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#CC1034",
+                borderColor: selectedColor[casesType],
                 data: data,
               },
             ],
