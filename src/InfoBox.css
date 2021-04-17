@@ -1,0 +1,46 @@
+.infoBox{
+    flex: 1;
+}
+
+.infoBox:not(:last-child) {
+    margin-right: 4px;
+  }
+
+  .infoBox--selected {
+    border-top: 10px solid greenyellow;
+  }
+
+  .infoBox--isCases{
+    border-top: 10px solid #cc1034;
+  }
+  .infoBox--isRecovered{
+    border-top: 10px solid green;
+  }
+  .infoBox--isDeaths{
+    border-top: 10px solid #808080;
+  }
+
+  .infoBox--isCasesColor{
+    color: #cc1034;
+  }
+  .infoBox--isRecoveredColor{
+    color: green;
+  }
+  .infoBox--isDeathsColor{
+    color: #808080;
+  }
+
+
+  .infoBox__cases {
+    /* color: #cc1034; */
+    font-weight: 600;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .infoBox__total {
+    color: #6c757d;
+    font-weight: 700 !important;
+    font-size: 0.8rem !important;
+    margin-top: 15px !important;
+  }
