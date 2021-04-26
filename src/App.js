@@ -7,6 +7,7 @@ import Table from './Table';
 import { sortData } from './util';
 import Linegraph from './Linegraph';
 import 'leaflet/dist/leaflet.css';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 
 function App() {
@@ -64,6 +65,8 @@ function App() {
 
   return (
     <div className="app">
+      <BrowserRouter>
+      <Route exact path="/covid19">
       <div className="app__left">  
       {/** Header */}
       <div className="app__header">
@@ -98,6 +101,8 @@ function App() {
         <Linegraph casesType={casesType}/>
         </CardContent>
       </Card>
+      </Route>
+      </BrowserRouter>
     </div>
   );
 }
